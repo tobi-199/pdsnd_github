@@ -19,7 +19,7 @@ def get_filters():
 
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
-        city = input("\nWhich city would you like to analyze? Chicago, New York City or Washington? :")
+        city = input("\nWhich city would you like to analyze? Chicago, New York City or Washington? :").title()
         if city not in ('Chicago', 'New York City', 'Washington'):
             print('Sorry, not an appropriate choice. Please try again.')
             continue
@@ -29,7 +29,7 @@ def get_filters():
 
     # TO DO: get user input for month (all, january, february, ... , june)
     while True:
-        month = input("\nWhich month would you like to filter by? January, February, March, April, May or June?\n To apply no filter, enter 'all': ")
+        month = input("\nWhich month would you like to filter by? January, February, March, April, May or June?\n To apply no filter, enter 'all': ").title()
         if month not in('January', 'February', 'March', 'April', 'May', 'June', 'all'):
             print('Sorry, not an appropriate choice. Please try again.')
         elif month == 'all':
@@ -41,7 +41,7 @@ def get_filters():
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday
     while True:
-        dow = input("\nWould you like to filter the data by a particular day of the week?\n Please enter the day as follows: Monday, Tuesday, ..., Sunday.  \n To apply no filter, enter 'all': ")
+        dow = input("\nWould you like to filter the data by a particular day of the week?\n Please enter the day as follows: Monday, Tuesday, ..., Sunday.  \n To apply no filter, enter 'all': ").title()
         if dow not in('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'all'):
             print('Sorry, not an appropriate choice. Please try again.')
         elif dow == 'all':
