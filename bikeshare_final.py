@@ -13,13 +13,13 @@ def get_filters():
     Returns:
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
+        (str) dow - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
 
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
-        city = input("\nWhich city would you like to analyze? Chicago, New York City or Washington? :")
+        city = input("\nWhich city would you like to analyze? Chicago, New York City or Washington? :").title()
         if city not in ('Chicago', 'New York City', 'Washington'):
             print('Sorry, not an appropriate choice. Please try again.')
             continue
@@ -29,10 +29,10 @@ def get_filters():
 
     # TO DO: get user input for month (all, january, february, ... , june)
     while True:
-        month = input("\nWhich month would you like to filter by? January, February, March, April, May or June?\n To apply no filter, enter 'all': ")
-        if month not in('January', 'February', 'March', 'April', 'May', 'June', 'all'):
+        month = input("\nWhich month would you like to filter by? January, February, March, April, May or June?\n To apply no filter, enter 'all': ").title()
+        if month not in('January', 'February', 'March', 'April', 'May', 'June', 'All'):
             print('Sorry, not an appropriate choice. Please try again.')
-        elif month == 'all':
+        elif month == 'All':
             print('You have decided to apply no filter.')
             break
         else:
@@ -41,10 +41,10 @@ def get_filters():
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday
     while True:
-        dow = input("\nWould you like to filter the data by a particular day of the week?\n Please enter the day as follows: Monday, Tuesday, ..., Sunday.  \n To apply no filter, enter 'all': ")
-        if dow not in('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'all'):
+        dow = input("\nWould you like to filter the data by a particular day of the week?\n Please enter the day as follows: Monday, Tuesday, ..., Sunday.  \n To apply no filter, enter 'all': ").title()
+        if dow not in('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'All'):
             print('Sorry, not an appropriate choice. Please try again.')
-        elif dow == 'all':
+        elif dow == 'All':
             print('You have decided to apply no filter.')
             break
         else:
@@ -63,9 +63,9 @@ def load_data(city, month, dow):
     Args:
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
+        (str) dow - name of the day of week to filter by, or "all" to apply no day filter
     Returns:
-        df - Pandas DataFrame containing city data filtered by month and day
+        df_citydata - Pandas DataFrame containing city data filtered by month and day
     """
     df_citydata = pd.read_csv(CITY_DATA[city])
 
@@ -74,10 +74,10 @@ def load_data(city, month, dow):
     df_citydata['month'] = df_citydata['Start Time'].dt.month_name()
     df_citydata['dow'] = df_citydata['Start Time'].dt.weekday_name
 
-    if month != 'all':
+    if month != 'All':
         df_citydata = df_citydata[df_citydata['month'] == month]
 
-    if dow != 'all':
+    if dow != 'All':
         df_citydata = df_citydata[df_citydata['dow'] == dow.title()]
 
     df_citydata['hour'] = df_citydata['Start Time'].dt.hour
@@ -98,11 +98,11 @@ def time_stats(df_citydata, month, dow):
     # TO DO: display the most common start hour
     most_pop_hour = df_citydata['hour'].mode()[0]
 
-    if month == 'all' and dow == 'all':
+    if month == 'All' and dow == 'All':
         print('The most popular month, day of week and hour is {}, {} and {}, respectively.'.format(most_pop_month, most_pop_dow, most_pop_hour))
-    elif month != 'all' and dow == 'all':
+    elif month != 'All' and dow == 'All':
         print('Based on your selected month, {}, the most popular day of week and hour is {} and {}, respectively.'.format(month, most_pop_dow, most_pop_hour))
-    elif month == 'all' and dow != 'all':
+    elif month == 'All' and dow != 'All':
         print('Based on your selected day of week, {}, the most popular month and hour is {} and {}, respectively.'.format(dow, most_pop_month, most_pop_hour))
     else:
         print('Based on your selected month, {}, and day of week, {}, the most popular hour is {}.'.format(month, dow, most_pop_hour))
